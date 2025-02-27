@@ -56,9 +56,10 @@ def get_bin_info_alternative(bin_number):
 async def handle_message(update: Update, context):
     """Maneja los mensajes recibidos y modifica los que contienen 'ADD A NEW CARD'"""
     message_text = update.message.text
+    print(f"📩 Mensaje recibido: {message_text}")  # Agregado para verificar los mensajes
     if "ADD A NEW CARD" in message_text:
         modified_message = message_text.replace("ADD A NEW CARD", "<b>MALA</b>")
-        bin_number = message_text.split('-')[0]
+        bin_number = message_text.split('-')[0]  # Suponiendo que el BIN está antes del guión
         bin_info = get_bin_info(bin_number)
         modified_message += f"\n{bin_info}"
 
@@ -69,7 +70,7 @@ async def handle_message(update: Update, context):
         except Exception as e:
             print(f"⚠️ Error al enviar mensaje al admin: {e}")
     else:
-        print(f"📩 Mensaje recibido: {message_text}")
+        print(f"📩 Mensaje no contiene 'ADD A NEW CARD'. No se modificará.")
 
 def main():
     """Inicia la aplicación de Telegram y configura el webhook"""
