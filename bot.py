@@ -73,12 +73,14 @@ async def handle_message(update: Update, context):
         print(f"📩 Mensaje no contiene 'ADD A NEW CARD'. No se modificará.")
 
 def main():
-    """Inicia la aplicación de Telegram y configura el webhook"""
+    """Inicia la aplicación de Telegram y configura el webhook o polling según sea necesario"""
     app = Application.builder().token(TOKEN).build()
 
-    # Configura el webhook con la URL pública de Railway
-    # Asegúrate de que la URL contenga el path correcto '/webhook'
-    app.run_webhook(listen="0.0.0.0", port=8080, url_path="webhook", webhook_url="https://sheinbot-production.up.railway.app/webhook")
+    # Cambio temporal a Polling para pruebas
+    app.run_polling()
+
+    # Si prefieres usar Webhook, usa esta línea en lugar de app.run_polling():
+    # app.run_webhook(listen="0.0.0.0", port=8080, url_path="webhook", webhook_url="https://sheinbot-production.up.railway.app/webhook")
 
     # Agregar un handler para mensajes de texto (ahora el filtro lee todos los mensajes de texto)
     app.add_handler(MessageHandler(filters.TEXT, handle_message))  # Este filtro lee todos los mensajes de texto
