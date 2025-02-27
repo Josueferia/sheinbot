@@ -73,20 +73,18 @@ async def handle_message(update: Update, context):
         print(f"📩 Mensaje no contiene 'ADD A NEW CARD'. No se modificará.")
 
 def main():
-    """Inicia la aplicación de Telegram y configura el webhook o polling según sea necesario"""
+    """Inicia la aplicación de Telegram y configura el polling para escuchar los mensajes"""
     app = Application.builder().token(TOKEN).build()
 
-    # Cambio temporal a Polling para pruebas
+    # Usamos Polling para recibir los mensajes
     app.run_polling()
-
-    # Si prefieres usar Webhook, usa esta línea en lugar de app.run_polling():
-    # app.run_webhook(listen="0.0.0.0", port=8080, url_path="webhook", webhook_url="https://sheinbot-production.up.railway.app/webhook")
 
     # Agregar un handler para mensajes de texto (ahora el filtro lee todos los mensajes de texto)
     app.add_handler(MessageHandler(filters.TEXT, handle_message))  # Este filtro lee todos los mensajes de texto
 
-    # Ejecuta el bot (eliminamos run_polling)
+    # Ejecuta el bot (eliminamos run_webhook ya que estamos usando polling)
     print("✅ Bot en ejecución...")
 
 if __name__ == "__main__":
     main()
+
