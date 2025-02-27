@@ -79,10 +79,9 @@ def main():
     # Usamos Polling para recibir los mensajes
     app.run_polling()
 
-    # Agregar un handler para mensajes de texto (ahora el filtro lee todos los mensajes de texto)
+    # Agregar un handler para mensajes de texto
     app.add_handler(MessageHandler(filters.TEXT, handle_message))  # Este filtro lee todos los mensajes de texto
 
-    # Ejecuta el bot (eliminamos run_webhook ya que estamos usando polling)
     print("✅ Bot en ejecución...")
 
 if __name__ == "__main__":
