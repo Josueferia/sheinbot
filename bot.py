@@ -82,9 +82,8 @@ def main():
     # Agregar un handler para mensajes de texto
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    # Ejecuta el bot
+    # Ejecuta el bot (eliminamos run_polling)
     print("✅ Bot en ejecución...")
-    app.run_polling()
 
 if __name__ == "__main__":
     main()
