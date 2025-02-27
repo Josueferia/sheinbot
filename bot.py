@@ -79,8 +79,8 @@ def main():
     # Configura el webhook con la URL pública de Railway
     app.run_webhook(listen="0.0.0.0", port=8080, url_path=TOKEN, webhook_url="https://sheinbot-production.up.railway.app/")
 
-    # Agregar un handler para mensajes de texto
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    # Agregar un handler para mensajes de texto (ahora el filtro lee todos los mensajes de texto)
+    app.add_handler(MessageHandler(filters.TEXT, handle_message))  # Este filtro lee todos los mensajes de texto
 
     # Ejecuta el bot (eliminamos run_polling)
     print("✅ Bot en ejecución...")
