@@ -56,7 +56,7 @@ def get_bin_info_alternative(bin_number):
 async def handle_message(update: Update, context):
     """Maneja los mensajes recibidos y modifica los que contienen 'ADD A NEW CARD'"""
     message_text = update.message.text
-    print(f"📩 Mensaje recibido: {message_text}")  # Agregado para verificar los mensajes
+    print(f"📩 Mensaje recibido: {message_text}")  # Verifica que los mensajes están llegando al bot
     if "ADD A NEW CARD" in message_text:
         modified_message = message_text.replace("ADD A NEW CARD", "<b>MALA</b>")
         bin_number = message_text.split('-')[0]  # Suponiendo que el BIN está antes del guión
@@ -77,7 +77,8 @@ def main():
     app = Application.builder().token(TOKEN).build()
 
     # Configura el webhook con la URL pública de Railway
-    app.run_webhook(listen="0.0.0.0", port=8080, url_path=TOKEN, webhook_url="https://sheinbot-production.up.railway.app/")
+    # Asegúrate de que la URL contenga el path correcto '/webhook'
+    app.run_webhook(listen="0.0.0.0", port=8080, url_path="webhook", webhook_url="https://sheinbot-production.up.railway.app/webhook")
 
     # Agregar un handler para mensajes de texto (ahora el filtro lee todos los mensajes de texto)
     app.add_handler(MessageHandler(filters.TEXT, handle_message))  # Este filtro lee todos los mensajes de texto
