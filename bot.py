@@ -1,10 +1,13 @@
 import asyncio
+HEAD
 import requests
 import re
+0529365631f08fdf4109aad188d5787c8945358c
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, CallbackContext
 
 TOKEN = "7459460142:AAHBe93qgXCwniLC4yXDcYP6l8t-A_2V0ac"
+HEAD
 ADMIN_ID = 991273718  # Reemplaza con tu ID de usuario en Telegram
 
 def get_bin_info(bin_number):
@@ -84,17 +87,41 @@ async def detect_message(update: Update, context: CallbackContext) -> None:
             print("✅ Mensaje enviado al admin.")
         except Exception as e:
             print(f"⚠️ Error al enviar mensaje al admin: {str(e)}")
+=======
+
+async def detect_message(update: Update, context: CallbackContext) -> None:
+    """Detecta si el mensaje es 'ADD A NEW CARD' y lo edita"""
+    if update.message.text == "ADD A NEW CARD":
+        # Enviar el mensaje inicial
+        message = await update.message.reply_text("Procesando...")
+        await asyncio.sleep(2)  # Espera 2 segundos antes de editar
+
+        # Editar el mensaje con "MALA" en rojo usando MarkdownV2
+        await message.edit_text("🔴 *MALA*", parse_mode="MarkdownV2")
+>>>>>>> 0529365631f08fdf4109aad188d5787c8945358c
 
 def main():
     app = Application.builder().token(TOKEN).build()
 
+<<<<<<< HEAD
     # Manejar todos los mensajes de texto en grupos
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, detect_message))
 
     print("✅ Bot en ejecución...")
     # Cambia de run_polling a run_webhook
     app.run_webhook(listen="0.0.0.0", port=8080, url_path=TOKEN)
+=======
+    # Manejar todos los mensajes de texto
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, detect_message))
+
+    print("Bot en ejecución...")
+    app.run_polling()
+>>>>>>> 0529365631f08fdf4109aad188d5787c8945358c
 
 if __name__ == '__main__':
     main()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0529365631f08fdf4109aad188d5787c8945358c
